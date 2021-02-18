@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.util.Random;
 
 public class Utils {
 
@@ -27,5 +28,11 @@ public class Utils {
 
     public static byte[] toByteDifEndian(int value) {
         return ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(value).array();
+    }
+    public static int randomID() {
+        Random random = new Random();
+        int id;
+        while ( (id = random.nextInt()) == -1 ) {}
+        return id;
     }
 }
