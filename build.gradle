@@ -5,6 +5,8 @@ plugins {
 group 'jp.momonnga'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
 tasks.withType(AbstractCompile)*.options*.encoding = 'UTF-8'
 
 repositories {
@@ -12,18 +14,12 @@ repositories {
 }
 
 dependencies {
-    compile 'jline:jline:2.14.6'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation 'jline:jline:2.14.6'
 }
 
 jar {
     manifest {
-        attributes('Main-Class':'jp.momonnga.rcon.RCON')
+        attributes('Main-Class':'jp.momonnga.rcon.SpigotRCON')
     }
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it)}
-}
-
-test {
-    useJUnitPlatform()
+    from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it)}
 }
